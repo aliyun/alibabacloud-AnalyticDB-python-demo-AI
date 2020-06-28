@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>OSS图像分析 - Aliyun</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button><a class="navbar-brand" href="index.html">AnalyticDB 阿里云分析型数据库 非结构化数据分析 演示</a><a class="navbar-nav ml-auto" href="https://cn.aliyun.com/product/gpdb">产品页面</a>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">简介</div>
+                            <a class="nav-link" href="coming-soon.html"
+                                ><div class="sb-nav-link-icon"><div class="i fas fa fa-database"></div></div>
+                                AnalyticDB</a
+                            ><a class="nav-link" href="coming-soon.html"
+                                ><div class="sb-nav-link-icon"><div class="i fas fa fa-table"></div></div>
+                                非结构化数据分析</a
+                            >
+                            <div class="sb-sidenav-menu-heading">演示</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-file-image"></i></div>
+                                图像视频
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="image-search.html">以图搜图</a><a class="nav-link" href="oss-image-analysis.html">oss图像分析</a><a class="nav-link" href="coming-soon.html">商品多模检索</a><a class="nav-link" href="coming-soon.html">人脸门禁</a></nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-file-word"></i></div>
+                                语音文本
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="coming-soon.html">声纹识别</a><a class="nav-link" href="coming-soon.html">单轮问答系统</a><a class="nav-link" href="coming-soon.html">摘要生成</a></nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-dna"></i></div>
+                                生物医疗
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="dna-search.html">病原体基因检测</a></nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-ad"></i></div>
+                                推荐系统
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="coming-soon.html">用户点击率推荐</a><a class="nav-link" href="coming-soon.html">商品推荐</a><a class="nav-link" href="coming-soon.html">电影推荐</a></nav>
+                            </div>
+                            <!--.sb-sidenav-menu-heading--><!--    | Core--><!----><!--a.nav-link(href='index.html')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-tachometer-alt--><!--    | Dashboard--><!----><!--.sb-sidenav-menu-heading--><!--    | Interface--><!----><!--a.nav-link.collapsed(href='#', data-toggle='collapse' data-target='#collapseLayouts' aria-expanded='false' aria-controls='collapseLayouts')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-columns--><!--    | Layouts--><!--    .sb-sidenav-collapse-arrow--><!--        i.fas.fa-angle-down--><!--#collapseLayouts.collapse(aria-labelledby='headingOne', data-parent='#sidenavAccordion')--><!--    nav.sb-sidenav-menu-nested.nav--><!--        a.nav-link(href='layout-static.html') Static Navigation--><!--        a.nav-link(href='layout-sidenav-light.html') Light Sidenav--><!----><!--a.nav-link.collapsed(href='#', data-toggle='collapse' data-target='#collapsePages' aria-expanded='false' aria-controls='collapsePages')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-book-open--><!--    | Pages--><!--    .sb-sidenav-collapse-arrow--><!--        i.fas.fa-angle-down--><!--#collapsePages.collapse(aria-labelledby='headingTwo', data-parent='#sidenavAccordion')--><!--    nav.sb-sidenav-menu-nested.nav.accordion#sidenavAccordionPages--><!--        a.nav-link.collapsed(href='#', data-toggle='collapse' data-target='#pagesCollapseAuth' aria-expanded='false' aria-controls='pagesCollapseAuth')--><!--            | Authentication--><!--            .sb-sidenav-collapse-arrow--><!--                i.fas.fa-angle-down--><!--        #pagesCollapseAuth.collapse(aria-labelledby='headingOne', data-parent='#sidenavAccordionPages')--><!--            nav.sb-sidenav-menu-nested.nav--><!--                a.nav-link(href='login.html') Login--><!--                a.nav-link(href='register.html') Register--><!--                a.nav-link(href='password.html') Forgot Password--><!--        a.nav-link.collapsed(href='#', data-toggle='collapse' data-target='#pagesCollapseError' aria-expanded='false' aria-controls='pagesCollapseError')--><!--            | Error--><!--            .sb-sidenav-collapse-arrow--><!--                i.fas.fa-angle-down--><!--        #pagesCollapseError.collapse(aria-labelledby='headingOne', data-parent='#sidenavAccordionPages')--><!--            nav.sb-sidenav-menu-nested.nav--><!--                a.nav-link(href='401.html') 401 Page--><!--                a.nav-link(href='404.html') 404 Page--><!--                a.nav-link(href='500.html') 500 Page--><!----><!--.sb-sidenav-menu-heading--><!--    | Addons--><!----><!--a.nav-link(href='charts.html')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-chart-area--><!--    | Charts--><!----><!--a.nav-link(href='tables.html')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-table--><!--    | Tables-->
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer"><div class="small">AnalyticDB Demos</div></div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <body ng-app="image_search_app" ng-controller="myCtrl" onload="database_count();" id="container">
+                        <!-- 显示图搜结果-->
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="index.html">AnalyticDB 演示</a></li>
+                            <li class="breadcrumb-item active">OSS图像分析</li>
+                        </ol>
+                        <div class="container-fluid p-0 m-0">
+                            <div class="card transparent-card m-0 p-0">
+                                <div class="row p-0 m-0">
+                                    <div class="col-xl-9 m-0 p-0 border-right pt-2">
+                                        <!--.row.p-0.m-0--><!--    .col-xl-12--><!--        .text-center--><!--            | OSS图像分析--><!--.row.p-0.m-2--><!--    .col-xl-7.m-0.p-2--><!--        .text--><!--            | bla bla bla...--><!--    .col-xl-5.m-0.p-2--><!--        img(width="100%" crossorigin="Anonymous" src="assets/oss-image-analysis/pipeline_graph.png")#image_intro--><!--hr-->
+                                        <div class="row p-0 m-0">
+                                            <div class="col-xl-12"><div class="text-center">搜索结果</div></div>
+                                            <div class="row p-0 m-0">
+                                                <div class="col-xl-4 m-0 p-0" ng-repeat="x in records track by $index">
+                                                    <div class="card m-1 p-0 h-100">
+                                                        <div class="card-body m-0 p-0"><img class="thumbnail img-preview" src="{{x['image']}}" width="100%" /></div>
+                                                        <div class="card-footer align-items-center"><a class="small text-black">{{x['attributes']}}</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 m-0 p-0">
+                                        <div class="row p-0 m-0">
+                                            <div class="col-xl-4 m-0 p-0"><hr /></div>
+                                            <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">填写OSS配置</div></div>
+                                            <div class="col-xl-4 m-0 p-0"><hr /></div>
+                                        </div>
+                                        <div class="row pl-4 pr-4 m-0"><input class="form-control" placeholder="OSS key" id="oss_key" /></div>
+                                        <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" type="password" placeholder="OSS secret" id="oss_secret" /></div>
+                                        <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" placeholder="OSS bucket名" id="oss_bucket" /></div>
+                                        <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" placeholder="OSS endpoint地址" id="oss_endpoint" /></div>
+                                        <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" placeholder="OSS 图像文件目录" id="oss_prefix" /></div>
+                                        <div class="row p-0 m-0">
+                                            <div class="col-xl-12 m-0 pt-2">
+                                                <div class="row">
+                                                    <div class="col-xl-3 m-0 p-0"><hr /></div>
+                                                    <div class="col-xl-6 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">图片上传OSS并建立索引</div></div>
+                                                    <div class="col-xl-3 m-0 p-0"><hr /></div>
+                                                </div>
+                                                <div class="row pl-4 pr-4 mt-4">
+                                                    <div class="col-xl-9 p-0 m-0"><div class="text" style="font-size:0.8vw;" id="count_value"></div></div>
+                                                    <div class="col-xl-3 m-0 p-0"><button class="btn btn-primary btn-dark btn-sm float-right" type="button" onclick="database_count();" id="refresh">刷新</button></div>
+                                                </div>
+                                                <md-form id="image_insert_form"
+                                                    ><div class="row p-0 pl-4 pr-4 mt-4">
+                                                        <div class="custom-file"><label class="custom-file-label" for="file_insert">选择图片列表</label><input class="custom-file-input" type="file" multiple id="file_insert" /></div>
+                                                    </div>
+                                                    <div class="row pl-4 pr-4 mt-2">
+                                                        <div class="col-xl-8 m-0 p-0"><p id="insert_msg"></p></div>
+                                                        <div class="col-xl-4 m-0 p-0"><button class="btn float-right btn-primary btn-dark btn-sm" type="button" onclick="insert_image();">导入</button></div>
+                                                    </div></md-form
+                                                >
+                                            </div>
+                                            <div class="col-xl-12 m-0 p-0 pt-2">
+                                                <div class="row m-0 p-0">
+                                                    <div class="col-xl-4 m-0 p-0"><hr /></div>
+                                                    <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">查询图片</div></div>
+                                                    <div class="col-xl-4 m-0 p-0"><hr /></div>
+                                                </div>
+                                                <form id="image_search_form">
+                                                    <div class="row pl-4 pr-4 m-0 mt-4"><label for="top_k" style="font-size:0.9vw;">返回图片数:</label><output name="top_k_output" style="font-size:1vw;" id="top_k_output">10</output></div>
+                                                    <div class="row pl-4 pr-4 m-0"><input class="custom-range" name="top_k" type="range" max="200" min="1" value="10" oninput="top_k_output.value = top_k.value" id="top_k" /></div>
+                                                    <div class="row pl-4 pr-4 m-0 mt-1">
+                                                        <div class="custom-file"><label class="custom-file-label" for="image_file">选择本地图片</label><input class="custom-file-input" type="file" id="image_file" /></div>
+                                                    </div>
+                                                    <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" placeholder="输入图片URL" id="image_url" /><input type="checkbox" name="is_face_image" value="true" id="is_face_image" /><label for="is_face_image">人脸图片</label></div>
+                                                    <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" name="gender" placeholder="图中人物性别" id="gender" /></div>
+                                                    <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" name="age_min" placeholder="图中人物年龄大于等于" id="age_min" /></div>
+                                                    <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" name="age_max" placeholder="图中人物年龄小于等于" id="age_max" /></div>
+                                                    <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" name="object_class" placeholder="图中物体名称" id="object_class" /></div>
+                                                    <div class="row pl-4 pr-4 m-0 mt-2">
+                                                        <div class="col-xl-12 m-0 p-0"><button class="btn float-right btn-primary btn-dark btn-sm" type="button" ng-click="image_search();">查询</button></div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-xl-12 m-0 pt-2">
+                                                <div class="row">
+                                                    <div class="col-xl-4 m-0 p-0"><hr /></div>
+                                                    <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">图片预览</div></div>
+                                                    <div class="col-xl-4 m-0 p-0"><hr /></div>
+                                                </div>
+                                                <div class="row"><img width="100%" crossorigin="Anonymous" id="image_preview" /></div>
+                                                <div class="row"><hr /></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script src="assets/js/angular-1.6.9/angular.min.js"></script>
+                        <script src="assets/oss-image-analysis.js"></script>
+                    </body>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Alibaba Inc 2020</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

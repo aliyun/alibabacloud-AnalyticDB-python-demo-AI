@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Charts - Aliyun</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button><a class="navbar-brand" href="index.html">AnalyticDB 阿里云分析型数据库 非结构化数据分析 演示</a><a class="navbar-nav ml-auto" href="https://cn.aliyun.com/product/gpdb">产品页面</a>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">简介</div>
+                            <a class="nav-link" href="coming-soon.html"
+                                ><div class="sb-nav-link-icon"><div class="i fas fa fa-database"></div></div>
+                                AnalyticDB</a
+                            ><a class="nav-link" href="coming-soon.html"
+                                ><div class="sb-nav-link-icon"><div class="i fas fa fa-table"></div></div>
+                                非结构化数据分析</a
+                            >
+                            <div class="sb-sidenav-menu-heading">演示</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-file-image"></i></div>
+                                图像视频
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="image-search.html">以图搜图</a><a class="nav-link" href="oss-image-analysis.html">oss图像分析</a><a class="nav-link" href="coming-soon.html">商品多模检索</a><a class="nav-link" href="coming-soon.html">人脸门禁</a></nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-file-word"></i></div>
+                                语音文本
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="coming-soon.html">声纹识别</a><a class="nav-link" href="coming-soon.html">单轮问答系统</a><a class="nav-link" href="coming-soon.html">摘要生成</a></nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-dna"></i></div>
+                                生物医疗
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="dna-search.html">病原体基因检测</a></nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-ad"></i></div>
+                                推荐系统
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="coming-soon.html">用户点击率推荐</a><a class="nav-link" href="coming-soon.html">商品推荐</a><a class="nav-link" href="coming-soon.html">电影推荐</a></nav>
+                            </div>
+                            <!--.sb-sidenav-menu-heading--><!--    | Core--><!----><!--a.nav-link(href='index.html')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-tachometer-alt--><!--    | Dashboard--><!----><!--.sb-sidenav-menu-heading--><!--    | Interface--><!----><!--a.nav-link.collapsed(href='#', data-toggle='collapse' data-target='#collapseLayouts' aria-expanded='false' aria-controls='collapseLayouts')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-columns--><!--    | Layouts--><!--    .sb-sidenav-collapse-arrow--><!--        i.fas.fa-angle-down--><!--#collapseLayouts.collapse(aria-labelledby='headingOne', data-parent='#sidenavAccordion')--><!--    nav.sb-sidenav-menu-nested.nav--><!--        a.nav-link(href='layout-static.html') Static Navigation--><!--        a.nav-link(href='layout-sidenav-light.html') Light Sidenav--><!----><!--a.nav-link.collapsed(href='#', data-toggle='collapse' data-target='#collapsePages' aria-expanded='false' aria-controls='collapsePages')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-book-open--><!--    | Pages--><!--    .sb-sidenav-collapse-arrow--><!--        i.fas.fa-angle-down--><!--#collapsePages.collapse(aria-labelledby='headingTwo', data-parent='#sidenavAccordion')--><!--    nav.sb-sidenav-menu-nested.nav.accordion#sidenavAccordionPages--><!--        a.nav-link.collapsed(href='#', data-toggle='collapse' data-target='#pagesCollapseAuth' aria-expanded='false' aria-controls='pagesCollapseAuth')--><!--            | Authentication--><!--            .sb-sidenav-collapse-arrow--><!--                i.fas.fa-angle-down--><!--        #pagesCollapseAuth.collapse(aria-labelledby='headingOne', data-parent='#sidenavAccordionPages')--><!--            nav.sb-sidenav-menu-nested.nav--><!--                a.nav-link(href='login.html') Login--><!--                a.nav-link(href='register.html') Register--><!--                a.nav-link(href='password.html') Forgot Password--><!--        a.nav-link.collapsed(href='#', data-toggle='collapse' data-target='#pagesCollapseError' aria-expanded='false' aria-controls='pagesCollapseError')--><!--            | Error--><!--            .sb-sidenav-collapse-arrow--><!--                i.fas.fa-angle-down--><!--        #pagesCollapseError.collapse(aria-labelledby='headingOne', data-parent='#sidenavAccordionPages')--><!--            nav.sb-sidenav-menu-nested.nav--><!--                a.nav-link(href='401.html') 401 Page--><!--                a.nav-link(href='404.html') 404 Page--><!--                a.nav-link(href='500.html') 500 Page--><!----><!--.sb-sidenav-menu-heading--><!--    | Addons--><!----><!--a.nav-link(href='charts.html')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-chart-area--><!--    | Charts--><!----><!--a.nav-link(href='tables.html')--><!--    .sb-nav-link-icon--><!--        i.fas.fa-table--><!--    | Tables-->
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer"><div class="small">AnalyticDB Demos</div></div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="index.html">AnalyticDB 演示</a></li>
+                            <li class="breadcrumb-item active">Charts</li>
+                        </ol>
+                        <div class="card mb-4">
+                            <div class="card-body">Chart.js is a third party plugin that is used to generate the charts in this template. The charts below have been customized - for further customization options, please visit the official <a target="_blank" href="https://www.chartjs.org/docs/latest/">Chart.js documentation</a>.</div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
+                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
+                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Pie Chart Example</div>
+                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Alibaba Inc 2020</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="assets/demo/chart-pie-demo.js"></script>
+    </body>
+</html>

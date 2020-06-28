@@ -1,0 +1,9 @@
+database_config:
+  database: <AnalyticDB Database Name>
+  host: <AnalyticDB HOST IP ADDRESS>
+  password: <AnalyticDB PASSWORD>
+  port: <AnalyticDB PORT>
+  user: <AnalyticDB USER NAME>
+demo_config:
+  host_ip: 0.0.0.0
+  host_port: <Demo Port Number>
