@@ -14,7 +14,7 @@
     * 基因检索
     
 介绍文档:
-    [<<使用AnalyticDB轻松实现以图搜图和人脸检索>>](https://github.com/aliyun/alibabacloud-AnalyticDB-python-demo-AI.git)
+    [<<使用AnalyticDB轻松实现以图搜图和人脸检索>>](https://developer.aliyun.com/article/765982?spm=a2c6h.13148508.0.0.7f4d4f0eAsgEzv)
     
 ## 使用方法:
 1. 首先需要获取AnalyticDB PostgreSQL版连接信息 获得AnalyticDB连接串. 可以加入下方钉钉群1元试用. 
