@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>以图搜图 - Aliyun</title>
+        <title>商品多维检索 - Aliyun</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -55,18 +55,29 @@
                         <!-- 显示图搜结果-->
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">AnalyticDB 演示</a></li>
-                            <li class="breadcrumb-item active">以图搜图</li>
+                            <li class="breadcrumb-item active">商品多维检索</li>
                         </ol>
                         <div class="container-fluid p-0 m-0">
                             <div class="card transparent-card m-0 p-0">
                                 <div class="row p-0 m-0">
                                     <div class="col-xl-9 m-0 p-0 border-right">
+                                        <div class="row p-0 m-0">
+                                            <div class="col-xl-7 m-0 p-0 border-right align-items-center">
+                                                <div class="text-center">图片预览</div>
+                                                <div class="row m-0 p-0"><img height="400" crossorigin="Anonymous" id="image_preview" /></div>
+                                            </div>
+                                            <div class="col-xl-5 m-0 p-0">
+                                                <div class="text-center">图像识别结果</div>
+                                                <div class="text" id="recognize_result"></div>
+                                            </div>
+                                        </div>
+                                        <hr />
                                         <div class="text-center">搜索结果</div>
                                         <div class="row p-0 m-0">
                                             <div class="col-xl-2 m-0 p-0" ng-repeat="x in records track by $index">
                                                 <div class="card m-1 p-0 h-100">
                                                     <div class="card-body m-0 p-0"><img class="thumbnail img-preview" src="{{x[1]}}" width="100%" /></div>
-                                                    <div class="card-footer align-items-center"><a class="small text-black">{{x[0]}}</a><br /><a class="small text-black">Distance: {{x[2]}}</a></div>
+                                                    <div class="card-footer align-items-center"><a class="small text-black">Distance: {{x[2]}}</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,7 +97,14 @@
                                                     </div>
                                                     <md-form id="image_insert_form"
                                                         ><div class="row p-0 pl-4 pr-4 mt-4">
-                                                            <div class="custom-file"><label class="custom-file-label" for="file_insert">选择图片列表</label><input class="custom-file-input" type="file" multiple id="file_insert" /></div>
+                                                            <select class="form-control" id="insert_category"
+                                                                ><option>男装</option
+                                                                ><option>女装</option
+                                                                ><option>童装</option
+                                                                ><option>箱包</option
+                                                                ><option>鞋靴</option></select
+                                                            >
+                                                            <div class="custom-file"><label class="custom-file-label" for="file_insert">选择商品图片</label><input class="custom-file-input" type="file" multiple id="file_insert" /></div>
                                                         </div>
                                                         <div class="row pl-4 pr-4 mt-2">
                                                             <div class="col-xl-8 m-0 p-0"><p id="insert_msg"></p></div>
@@ -103,22 +121,28 @@
                                                     <form id="image_search_form">
                                                         <div class="row pl-4 pr-4 m-0 mt-4"><label for="top_k" style="font-size:0.9vw;">返回图片数:</label><output name="top_k_output" style="font-size:1vw;" id="top_k_output">10</output></div>
                                                         <div class="row pl-4 pr-4 m-0"><input class="custom-range" name="top_k" type="range" max="200" min="1" value="10" oninput="top_k_output.value = top_k.value" id="top_k" /></div>
-                                                        <div class="row pl-4 pr-4 m-0 mt-4"><input class="form-control" placeholder="输入图片URL" id="image_url" /></div>
-                                                        <div class="row pl-4 pr-4 m-0 mt-4">
-                                                            <div class="custom-file"><label class="custom-file-label" for="image_file">选择本地图片文件</label><input class="custom-file-input" type="file" id="image_file" /></div>
+                                                        <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" placeholder="输入商品图片URL" id="image_url" /></div>
+                                                        <div class="row pl-4 pr-4 m-0 mt-1">
+                                                            <div class="custom-file"><label class="custom-file-label" for="image_file">选择商品图片文件</label><input class="custom-file-input" type="file" id="image_file" /></div>
                                                         </div>
+                                                        <div class="row pl-4 pr-4 m-0 mt-1">
+                                                            <label for="search_category">选择商品类别</label
+                                                            ><select class="form-control" id="search_category"
+                                                                ><option value="女装">女装</option
+                                                                ><option>男装</option
+                                                                ><option>童装</option
+                                                                ><option>箱包</option
+                                                                ><option>鞋靴</option></select
+                                                            >
+                                                        </div>
+                                                        <div class="row pl-4 pr-4 m-0 mt-1"><input class="form-control" placeholder="搜索关键词" id="keywords" /></div>
                                                         <div class="row pl-4 pr-4 m-0 mt-2">
-                                                            <div class="col-xl-12 m-0 p-0"><button class="btn float-right btn-primary btn-dark btn-sm" type="button" ng-click="image_search();">搜索</button></div>
+                                                            <div class="col-xl-12 m-0 p-0"><button class="btn float-left btn-primary btn-dark btn-sm" type="button" onclick="image_recognize();">识别商品属性</button><button class="btn float-right btn-primary btn-dark btn-sm" type="button" ng-click="image_search();">搜索</button></div>
                                                         </div>
+                                                        <div class="row pl-4 pr-4 m-0 mt-2"></div>
                                                     </form>
                                                 </div>
                                                 <div class="col-xl-12 m-0 pt-2">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 m-0 p-0"><hr /></div>
-                                                        <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">图片预览</div></div>
-                                                        <div class="col-xl-4 m-0 p-0"><hr /></div>
-                                                    </div>
-                                                    <div class="row"><img width="100%" crossorigin="Anonymous" id="image_preview" /></div>
                                                     <div class="row"><hr /></div>
                                                 </div>
                                             </div>
@@ -129,7 +153,7 @@
                         </div>
                         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
                         <script src="assets/js/angular-1.6.9/angular.min.js"></script>
-                        <script src="assets/main.js"></script>
+                        <script src="assets/item-search/item-search.js"></script>
                     </body>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

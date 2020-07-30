@@ -1,38 +1,38 @@
 from flask import Blueprint, jsonify, request
 from flask_api import status
 import sqlalchemy
-from sqlalchemy.dialects.postgresql import BYTEA
 import psycopg2 as pg2
 from sqlalchemy import create_engine, func, select, table, insert
-from sqlalchemy import Table, Column, String, MetaData
 from utils.models import db
 from sqlalchemy.sql.expression import cast
 import traceback
-import io
 import os
 import base64
 from logger import logger
 import uuid
 from utils.utils import byteify, get_image_uri, get_image_thumbnail
 import time
-image_search_api = Blueprint("image_search_api", __name__)
+from sqlalchemy import func
+face_search_api = Blueprint("face_search_api", __name__)
 class images(db.Model):
-    __tablename__ = 'image_table'
+    __tablename__ = 'face_search_table'
     image_name = db.Column(db.Text, primary_key=True)
     # image_data = db.Column(db.LargeBinary, nullable=False)
-    image_data_thumbnail = db.Column(db.LargeBinary, nullable=False)
+    image_data = db.Column(db.LargeBinary, nullable=False)
     feature = db.Column(db.ARRAY(db.REAL), nullable=False)
     def __repr__(self):
         return '<name %s>' % self.image_name
+
+db.Index('face_search_feature_index', images.feature, postgresql_using="ann", postgresql_with={"dim": 512})
 
 def get_feature(data):
     feature = \
         cast(
             func.pg_catalog.TRANSLATE(
                 cast(
-                    cast(func.open_analytic.pipeline_run_dist_random('general_feature_extractor', data),
+                    cast(func.open_analytic.pipeline_run_dist_random('face_feature_extractor', data),
                          sqlalchemy.types.JSON)[
-                        'feature'],
+                        'face_emb'],
                     sqlalchemy.types.TEXT
                 ),
                 '[]',
@@ -43,39 +43,27 @@ def get_feature(data):
     return feature
 
 def init():
-    result_set = db.engine.execute("select 1 from open_analytic.current_pipelines where name = 'general_feature_extractor'")
+    result_set = db.engine.execute("select 1 from open_analytic.current_pipelines where name = 'face_feature_extractor'")
     if result_set.rowcount == 0:
-        result_set = db.engine.execute(func.open_analytic.pipeline_create('general_feature_extractor'))
-        for r in result_set:
-            print r
+        db.engine.execute(func.open_analytic.pipeline_create('face_feature_extractor'))
 
 def insert(image_name, image_bytes):
-
     image_bytes_thumbnail = get_image_thumbnail(image_bytes)
     data = pg2.Binary(image_bytes_thumbnail)
     feature = get_feature(data)
-    print image_name
-
-    # record = images(image_name=image_name, image_data=image_bytes, feature=select([feature]))
-
-    ins = images.__table__.insert().values(image_name=image_name, image_data_thumbnail=image_bytes_thumbnail, feature=select([feature]))
+    ins = images.__table__.insert().values(image_name=image_name, image_data=image_bytes_thumbnail, feature=select([feature]))
     db.engine.execute(ins)
-    # db.session.add(record)
-    # db.session.commit()
 
 def search(image_bytes, top_k=10):
-    image_bytes = get_image_thumbnail(image_bytes)
+    # image_bytes = get_image_thumbnail(image_bytes)
     data = pg2.Binary(image_bytes)
     feature_query = get_feature(data)
     # distance = func.public.l2_distance(feature_query, images.feature)
     result = db.engine.execute(select([feature_query]))
     for row in result:
         feature_val = row[0]
-    print feature_val
-    distance = func.public.l2_distance(feature_val, images.feature)
-    stmt = select([images.image_name, images.image_data_thumbnail, distance.label('dist')]).order_by('dist').limit(top_k)
-    # stmt = "select image_name, image_data_thumbnail from images where image_name = '743b90ce-6669-462f-874b-c259d44a30c8';"
-    print stmt
+    distance = images.feature.op('<->')(feature_val)
+    stmt = select([images.image_name, images.image_data, func.public.l2_distance(feature_val, images.feature)]).order_by(distance).limit(top_k)
     t_start = time.time()
     result = db.engine.execute(stmt)
     print time.time() - t_start
@@ -87,14 +75,7 @@ def count():
     result = [r[0] for r in result]
     return result
 
-def clear(engine):
-    pass
-
-def destroy(engine):
-    pass
-
-
-@image_search_api.route('/image_search/search',  methods=['POST', 'GET'])
+@face_search_api.route('/face_search/search',  methods=['POST', 'GET'])
 def search_api():
     try:
         t_start = time.time()
@@ -118,15 +99,16 @@ def search_api():
         return jsonify({"code": status.HTTP_200_OK, 'result': byteify(result), "msg": ""})
     except:
         traceback.print_exc()
-        return jsonify({"code": status.HTTP_500_INTERNAL_SERVER_ERROR, "msg": "Internal error "})
+        return status.HTTP_500_INTERNAL_SERVER_ERROR, "Internal error "
+        # return jsonify({"code": status.HTTP_500_INTERNAL_SERVER_ERROR, "msg": "Internal error "})
 
 
-@image_search_api.route('/image_search/insert', methods=['POST', 'GET'])
+@face_search_api.route('/face_search/insert', methods=['POST', 'GET'])
 def insert_api():
     try:
-
         image_data = request.form.get('image')
         image_name = request.form.get('image_name')
+        print image_name
         if image_data is None:
             return jsonify({"code": status.HTTP_400_BAD_REQUEST,
                             "msg": "image data is missing"})
@@ -138,25 +120,13 @@ def insert_api():
         image_bytes = base64.b64decode(image_data)
         init()
         insert(image_name, image_bytes)
-
-        # image_file = request.files['photo']
-        # image_path = '/Users/chaoshi/Projects/adbpg_86/adbpg/contrib/adbpg_vector/open_analytic/test/imgs/object_detector.jpeg'
-        # with open(image_path, 'rb') as f:
-        #     # data = pg2.Binary(f.read())
-        #     image_bytes = f.read()
-        # # init()
-        # insert('test_image1.jpg', image_bytes)
-        # insert('test_image2.jpg', image_bytes)
-        # insert('test_image3.jpg', image_bytes)
-        # insert('test_image4.jpg', image_bytes)
-        # insert('test_image5.jpg', image_bytes)
     except:
         logger.error(traceback.print_exc())
         return jsonify({"code": status.HTTP_500_INTERNAL_SERVER_ERROR, "msg": "Internal error "})
     result = []
     return jsonify({"code": status.HTTP_200_OK, 'result': result, "msg": ""})
 
-@image_search_api.route('/image_search/init')
+@face_search_api.route('/face_search/init')
 def image_search_init():
     try:
         init()
@@ -165,17 +135,8 @@ def image_search_init():
         return jsonify({"code": status.HTTP_500_INTERNAL_SERVER_ERROR, "msg": "Internal error "})
     return jsonify({"code": status.HTTP_200_OK, "msg": ""})
 
-@image_search_api.route('/image_search_clear')
-def image_search_clear():
-    result = []
-    return jsonify({"code": status.HTTP_200_OK, 'result': result, "msg": ""})
 
-@image_search_api.route('/image_search_destroy')
-def image_search_destroy():
-    result = []
-    return jsonify({"code": status.HTTP_200_OK, 'result': result, "msg": ""})
-
-@image_search_api.route('/image_search/count', methods=['GET'])
+@face_search_api.route('/face_search/count', methods=['GET'])
 def count_api():
     try:
         result = count()
@@ -183,7 +144,3 @@ def count_api():
     except:
         logger.error(traceback.print_exc())
         return jsonify({"code": status.HTTP_500_INTERNAL_SERVER_ERROR, "msg": "Internal error "})
-
-
-
-

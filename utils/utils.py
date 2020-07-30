@@ -31,5 +31,5 @@ def get_image_thumbnail(image_bytes, size = (224,224)):
     image.save(imgByteArr, format='jpeg')
     return imgByteArr.getvalue()
 
-import oss2
-oss2.Bucket().put_object_with_url_from_file()
+
+

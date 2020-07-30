@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>以图搜图 - Aliyun</title>
+        <title>单轮问答系统 - Aliyun</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -51,75 +51,94 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <body ng-app="image_search_app" ng-controller="myCtrl" onload="database_count();" id="container">
+                    <body ng-app="dna_search_app" ng-controller="myCtrl" onload="database_count();" id="container">
                         <!-- 显示图搜结果-->
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">AnalyticDB 演示</a></li>
-                            <li class="breadcrumb-item active">以图搜图</li>
+                            <li class="breadcrumb-item active">单轮问答系统</li>
                         </ol>
                         <div class="container-fluid p-0 m-0">
                             <div class="card transparent-card m-0 p-0">
                                 <div class="row p-0 m-0">
-                                    <div class="col-xl-9 m-0 p-0 border-right">
-                                        <div class="text-center">搜索结果</div>
-                                        <div class="row p-0 m-0">
-                                            <div class="col-xl-2 m-0 p-0" ng-repeat="x in records track by $index">
-                                                <div class="card m-1 p-0 h-100">
-                                                    <div class="card-body m-0 p-0"><img class="thumbnail img-preview" src="{{x[1]}}" width="100%" /></div>
-                                                    <div class="card-footer align-items-center"><a class="small text-black">{{x[0]}}</a><br /><a class="small text-black">Distance: {{x[2]}}</a></div>
-                                                </div>
+                                    <div class="col-xl-8 m-0 p-0 border-right pt-2">
+                                        <div class="text-center">AnalyticDB单轮问答系统</div>
+                                        <div class="row p-0 m-2">
+                                            <div class="col-xl-7 m-0 p-2"><text>单轮问答系统, 主要依赖两个关键模块. 首先是文本转特征模块, 通过基于海量文本数据训练的深度学习模型我们可以将不同长度的文本转化成固定长度的特征向量. 这个特征向量描述了文本的语义. 第二个模块是向量检索引擎, 可以在海量的特征向量中匹配与目标特征最相似的记录. 如下图所示, 我们使用特征提取模块, 离线提取问题库中所有问题的特征向量. 然后将问题库中的所有问题, 答案, 和问题的特征向量保存到数据库中. 然后当用于进行提问时, 我们首先提取问题的特征向量, 然后在数据库中检索与问题最为相似的的问题并返回对应的答案. 在实际应用场景中我们可以根据目标问题与返回结果的特征距离来判断用户的提问是否存在于我们的问题库中.</text></div>
+                                            <div class="col-xl-5 m-0 p-2"><img width="100%" crossorigin="Anonymous" src="assets/qa/qa.png" id="qa_intro" /></div>
+                                        </div>
+                                        <hr />
+                                        <div class="row p-0 m-0 d-none" id="search_result">
+                                            <div class="col-xl-12"><div class="text-center">搜索结果</div></div>
+                                            <div class="col-xl-12 m-0 p-0">
+                                                <table class="table-bordered" id="dataTable" width="100%" cellspacing="0" style="overflow-wrap: break-word; table-layout: fixed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:30%">问题</th>
+                                                            <th style="width:50%">答案</th>
+                                                            <th style="width:20%">距离(越小越相似)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-repeat="x in records track by $index">
+                                                        <tr>
+                                                            <td>{{x[0]}}</td>
+                                                            <td>{{x[1]}}</td>
+                                                            <td>{{x[2]}}</td>
+                                                        </tr>
+                                                        <tr></tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 m-0 p-0">
+                                    <div class="col-xl-4 m-0 p-0">
                                         <div class="card-body m-0 p-0">
-                                            <div class="row p-0 pl-1 m-0">
+                                            <div class="row p-0 pl-0 m-0">
                                                 <div class="col-xl-12 m-0 pt-2">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 m-0 p-0"><hr /></div>
-                                                        <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">导入图片</div></div>
-                                                        <div class="col-xl-4 m-0 p-0"><hr /></div>
-                                                    </div>
                                                     <div class="row pl-4 pr-4 mt-4">
-                                                        <div class="col-xl-9 p-0 m-0"><div class="text" style="font-size:0.8vw;" id="count_value"></div></div>
+                                                        <div class="col-xl-9 p-0 m-0"><div class="text" style="font-size:1vw;" id="count_value"></div></div>
                                                         <div class="col-xl-3 m-0 p-0"><button class="btn btn-primary btn-dark btn-sm float-right" type="button" onclick="database_count();" id="refresh">刷新</button></div>
                                                     </div>
-                                                    <md-form id="image_insert_form"
-                                                        ><div class="row p-0 pl-4 pr-4 mt-4">
-                                                            <div class="custom-file"><label class="custom-file-label" for="file_insert">选择图片列表</label><input class="custom-file-input" type="file" multiple id="file_insert" /></div>
-                                                        </div>
-                                                        <div class="row pl-4 pr-4 mt-2">
-                                                            <div class="col-xl-8 m-0 p-0"><p id="insert_msg"></p></div>
-                                                            <div class="col-xl-4 m-0 p-0"><button class="btn float-right btn-primary btn-dark btn-sm" type="button" onclick="insert_image();">导入</button></div>
-                                                        </div></md-form
-                                                    >
                                                 </div>
+                                            </div>
+                                            <div class="row p-0 m-0">
                                                 <div class="col-xl-12 m-0 pt-2">
-                                                    <div class="row">
+                                                    <div class="row p-0 m-0">
                                                         <div class="col-xl-4 m-0 p-0"><hr /></div>
-                                                        <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">搜索图片</div></div>
+                                                        <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">搜索问题</div></div>
                                                         <div class="col-xl-4 m-0 p-0"><hr /></div>
                                                     </div>
-                                                    <form id="image_search_form">
-                                                        <div class="row pl-4 pr-4 m-0 mt-4"><label for="top_k" style="font-size:0.9vw;">返回图片数:</label><output name="top_k_output" style="font-size:1vw;" id="top_k_output">10</output></div>
-                                                        <div class="row pl-4 pr-4 m-0"><input class="custom-range" name="top_k" type="range" max="200" min="1" value="10" oninput="top_k_output.value = top_k.value" id="top_k" /></div>
-                                                        <div class="row pl-4 pr-4 m-0 mt-4"><input class="form-control" placeholder="输入图片URL" id="image_url" /></div>
-                                                        <div class="row pl-4 pr-4 m-0 mt-4">
-                                                            <div class="custom-file"><label class="custom-file-label" for="image_file">选择本地图片文件</label><input class="custom-file-input" type="file" id="image_file" /></div>
-                                                        </div>
+                                                    <form id="qa_search_form">
+                                                        <div class="row pl-4 pr-4 m-0 mt-4"><label for="top_k" style="font-size:0.9vw;">返回个数:</label><output name="top_k_output" style="font-size:1vw;" id="top_k_output">10</output></div>
+                                                        <div class="row pl-4 pr-4 m-0"><input class="custom-range" name="top_k" type="range" max="50" min="1" value="10" oninput="top_k_output.value = top_k.value" id="top_k" /></div>
+                                                        <div class="row pl-4 pr-4 m-0 mt-4"><input class="form-control" name="question" placeholder="" id="question" /></div>
                                                         <div class="row pl-4 pr-4 m-0 mt-2">
-                                                            <div class="col-xl-12 m-0 p-0"><button class="btn float-right btn-primary btn-dark btn-sm" type="button" ng-click="image_search();">搜索</button></div>
+                                                            <div class="col-xl-12 m-0 p-0"><button class="btn float-right btn-primary btn-dark btn-sm" type="button" ng-click="qa_search();">搜索</button></div>
+                                                            <div class="col-xl-12 m-0 p-0"><div class="text" style="font-size:1vw;" href="javascript:alert(withBreaks)" id="search_sequence"></div></div>
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="col-xl-12 m-0 pt-2">
-                                                    <div class="row">
+                                                <div class="col-xl-12 m-0 pt-2 pl-4 pr-4">
+                                                    <div class="row p-0 m-0">
                                                         <div class="col-xl-4 m-0 p-0"><hr /></div>
-                                                        <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">图片预览</div></div>
+                                                        <div class="col-xl-4 m-0 p-0 pt-2"><div class="text-center" style="font-size:0.9vw;">关于阿里云ECS问题</div></div>
                                                         <div class="col-xl-4 m-0 p-0"><hr /></div>
                                                     </div>
-                                                    <div class="row"><img width="100%" crossorigin="Anonymous" id="image_preview" /></div>
-                                                    <div class="row"><hr /></div>
+                                                    <div class="text-center" style="font-size:0.8vw;">可以尝试以下问题</div>
+                                                    <div class="text">忘记密码怎么办?</div>
+                                                    <br />
+                                                    <div class="text">怎么计费?</div>
+                                                    <br />
+                                                    <div class="text">如何升配?</div>
+                                                    <br />
+                                                    <div class="text">怎么开发票?</div>
+                                                    <br />
+                                                    <div class="text">实例无法连接怎么办?</div>
+                                                    <br />
+                                                    <div class="text">如何选择可用区?</div>
+                                                    <br />
+                                                    <div class="text">重启失败怎么办?</div>
+                                                    <br />
+                                                    <div class="text">怎么配置安全组</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +148,8 @@
                         </div>
                         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
                         <script src="assets/js/angular-1.6.9/angular.min.js"></script>
-                        <script src="assets/main.js"></script>
+                        <script src="assets/js/angular-1.6.9/angular-sanitize.js"></script>
+                        <script src="assets/qa/qa.js"></script>
                     </body>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

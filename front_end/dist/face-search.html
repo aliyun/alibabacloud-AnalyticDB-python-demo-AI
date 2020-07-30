@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>以图搜图 - Aliyun</title>
+        <title>人脸检索 - Aliyun</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -55,18 +55,31 @@
                         <!-- 显示图搜结果-->
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">AnalyticDB 演示</a></li>
-                            <li class="breadcrumb-item active">以图搜图</li>
+                            <li class="breadcrumb-item active">人脸检索</li>
                         </ol>
                         <div class="container-fluid p-0 m-0">
                             <div class="card transparent-card m-0 p-0">
                                 <div class="row p-0 m-0">
                                     <div class="col-xl-9 m-0 p-0 border-right">
+                                        <div class="row p-0 m-0">
+                                            <div class="col-xl-12"><div class="text-center">人脸检索</div></div>
+                                        </div>
+                                        <div class="row p-0 m-2">
+                                            <div class="col-xl-10 m-0 p-2">
+                                                <div class="text">
+                                                    <p>以图搜图又被称为反向图搜(Reverse image search)是一种基于内容的图像检索(Content-based Image Retrieval) 技术. 以图片作为查询的对象, 以图搜图系统会在大量的图像记录中返回与查询图像内容最相关的记录. 例如, 商品图搜会返回与查询图片中主体物品相同或相似的图片信息. 人脸的图搜会根据图片中人脸特征返回目标人物的记录. 以图搜图应用主要依赖两个模块, 其中特征提取模块主要负责从图像中提取视觉特征数值, 从而获得一个高维的特征向量, 在这个高维特征空间中越相似的图像距离越近. 向量检索模块负责在海量的图像特征向量集中查找与查询图片特征最接近的前k个记录, 并返回.</p>
+                                                    <p>AnalyticDB以图搜图demo的架构如右图所示, 图像的ID, 二进制文件和图像的特征向量都保存在AnalyticDB中, 同时AnalyticDB还负责从图像中提取特征向量,特征向量的搜索. 不依赖其他服务, 用户只需要SQL就可以完成全部核心操作.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-2 m-0 p-2"><img width="100%" crossorigin="Anonymous" src="assets/image-search/image-search.png" id="image_intro" /></div>
+                                        </div>
+                                        <hr />
                                         <div class="text-center">搜索结果</div>
                                         <div class="row p-0 m-0">
                                             <div class="col-xl-2 m-0 p-0" ng-repeat="x in records track by $index">
                                                 <div class="card m-1 p-0 h-100">
                                                     <div class="card-body m-0 p-0"><img class="thumbnail img-preview" src="{{x[1]}}" width="100%" /></div>
-                                                    <div class="card-footer align-items-center"><a class="small text-black">{{x[0]}}</a><br /><a class="small text-black">Distance: {{x[2]}}</a></div>
+                                                    <div class="card-footer align-items-center"><a class="small text-black">Distance: {{x[2]}}</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,7 +99,7 @@
                                                     </div>
                                                     <md-form id="image_insert_form"
                                                         ><div class="row p-0 pl-4 pr-4 mt-4">
-                                                            <div class="custom-file"><label class="custom-file-label" for="file_insert">选择图片列表</label><input class="custom-file-input" type="file" multiple id="file_insert" /></div>
+                                                            <div class="custom-file"><label class="custom-file-label" for="file_insert">选择人脸图片列表</label><input class="custom-file-input" type="file" multiple id="file_insert" /></div>
                                                         </div>
                                                         <div class="row pl-4 pr-4 mt-2">
                                                             <div class="col-xl-8 m-0 p-0"><p id="insert_msg"></p></div>
@@ -103,9 +116,9 @@
                                                     <form id="image_search_form">
                                                         <div class="row pl-4 pr-4 m-0 mt-4"><label for="top_k" style="font-size:0.9vw;">返回图片数:</label><output name="top_k_output" style="font-size:1vw;" id="top_k_output">10</output></div>
                                                         <div class="row pl-4 pr-4 m-0"><input class="custom-range" name="top_k" type="range" max="200" min="1" value="10" oninput="top_k_output.value = top_k.value" id="top_k" /></div>
-                                                        <div class="row pl-4 pr-4 m-0 mt-4"><input class="form-control" placeholder="输入图片URL" id="image_url" /></div>
+                                                        <div class="row pl-4 pr-4 m-0 mt-4"><input class="form-control" placeholder="输入人脸图片URL" id="image_url" /></div>
                                                         <div class="row pl-4 pr-4 m-0 mt-4">
-                                                            <div class="custom-file"><label class="custom-file-label" for="image_file">选择本地图片文件</label><input class="custom-file-input" type="file" id="image_file" /></div>
+                                                            <div class="custom-file"><label class="custom-file-label" for="image_file">选择本地人脸图片文件</label><input class="custom-file-input" type="file" id="image_file" /></div>
                                                         </div>
                                                         <div class="row pl-4 pr-4 m-0 mt-2">
                                                             <div class="col-xl-12 m-0 p-0"><button class="btn float-right btn-primary btn-dark btn-sm" type="button" ng-click="image_search();">搜索</button></div>
@@ -129,7 +142,7 @@
                         </div>
                         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
                         <script src="assets/js/angular-1.6.9/angular.min.js"></script>
-                        <script src="assets/main.js"></script>
+                        <script src="assets/face-search/face-search.js"></script>
                     </body>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
