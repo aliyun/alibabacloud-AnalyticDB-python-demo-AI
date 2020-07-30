@@ -17,7 +17,6 @@ face_search_api = Blueprint("face_search_api", __name__)
 class images(db.Model):
     __tablename__ = 'face_search_table'
     image_name = db.Column(db.Text, primary_key=True)
-    # image_data = db.Column(db.LargeBinary, nullable=False)
     image_data = db.Column(db.LargeBinary, nullable=False)
     feature = db.Column(db.ARRAY(db.REAL), nullable=False)
     def __repr__(self):
@@ -55,10 +54,8 @@ def insert(image_name, image_bytes):
     db.engine.execute(ins)
 
 def search(image_bytes, top_k=10):
-    # image_bytes = get_image_thumbnail(image_bytes)
     data = pg2.Binary(image_bytes)
     feature_query = get_feature(data)
-    # distance = func.public.l2_distance(feature_query, images.feature)
     result = db.engine.execute(select([feature_query]))
     for row in result:
         feature_val = row[0]
@@ -100,8 +97,6 @@ def search_api():
     except:
         traceback.print_exc()
         return status.HTTP_500_INTERNAL_SERVER_ERROR, "Internal error "
-        # return jsonify({"code": status.HTTP_500_INTERNAL_SERVER_ERROR, "msg": "Internal error "})
-
 
 @face_search_api.route('/face_search/insert', methods=['POST', 'GET'])
 def insert_api():

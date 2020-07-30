@@ -1,19 +1,10 @@
 # coding: utf-8
 from flask import Blueprint, jsonify, request
 from flask_api import status
-import sqlalchemy
-from sqlalchemy.dialects.postgresql import BYTEA
-import psycopg2 as pg2
 from sqlalchemy import create_engine, func, select, table, insert
-from sqlalchemy import Table, Column, String, MetaData
 from utils.models import db
-from sqlalchemy.sql.expression import cast
 import traceback
-import io
-import os
-import base64
 from logger import logger
-import uuid
 from utils.utils import byteify, get_image_uri, get_image_thumbnail
 import time
 import json

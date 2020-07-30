@@ -54,14 +54,9 @@ def insert(image_name, image_bytes):
     image_bytes_thumbnail = get_image_thumbnail(image_bytes)
     data = pg2.Binary(image_bytes_thumbnail)
     feature = get_feature(data)
-    print image_name
-
-    # record = images(image_name=image_name, image_data=image_bytes, feature=select([feature]))
-
     ins = images.__table__.insert().values(image_name=image_name, image_data_thumbnail=image_bytes_thumbnail, feature=select([feature]))
     db.engine.execute(ins)
-    # db.session.add(record)
-    # db.session.commit()
+
 
 def search(image_bytes, top_k=10):
     image_bytes = get_image_thumbnail(image_bytes)
@@ -71,11 +66,8 @@ def search(image_bytes, top_k=10):
     result = db.engine.execute(select([feature_query]))
     for row in result:
         feature_val = row[0]
-    print feature_val
     distance = func.public.l2_distance(feature_val, images.feature)
     stmt = select([images.image_name, images.image_data_thumbnail, distance.label('dist')]).order_by('dist').limit(top_k)
-    # stmt = "select image_name, image_data_thumbnail from images where image_name = '743b90ce-6669-462f-874b-c259d44a30c8';"
-    print stmt
     t_start = time.time()
     result = db.engine.execute(stmt)
     print time.time() - t_start
@@ -98,13 +90,11 @@ def destroy(engine):
 def search_api():
     try:
         t_start = time.time()
-        # print request.form, request.files
         image_data = request.form.get('image')
         top_k = request.form.get('top_k')
         if image_data is None:
             return jsonify({"code": status.HTTP_400_BAD_REQUEST,
                             "msg": "image data is missing"})
-        # print image_data
         image_data = image_data.split(',')[-1]
         image_bytes = base64.b64decode(image_data)
         init()
@@ -124,7 +114,6 @@ def search_api():
 @image_search_api.route('/image_search/insert', methods=['POST', 'GET'])
 def insert_api():
     try:
-
         image_data = request.form.get('image')
         image_name = request.form.get('image_name')
         if image_data is None:
@@ -138,18 +127,6 @@ def insert_api():
         image_bytes = base64.b64decode(image_data)
         init()
         insert(image_name, image_bytes)
-
-        # image_file = request.files['photo']
-        # image_path = '/Users/chaoshi/Projects/adbpg_86/adbpg/contrib/adbpg_vector/open_analytic/test/imgs/object_detector.jpeg'
-        # with open(image_path, 'rb') as f:
-        #     # data = pg2.Binary(f.read())
-        #     image_bytes = f.read()
-        # # init()
-        # insert('test_image1.jpg', image_bytes)
-        # insert('test_image2.jpg', image_bytes)
-        # insert('test_image3.jpg', image_bytes)
-        # insert('test_image4.jpg', image_bytes)
-        # insert('test_image5.jpg', image_bytes)
     except:
         logger.error(traceback.print_exc())
         return jsonify({"code": status.HTTP_500_INTERNAL_SERVER_ERROR, "msg": "Internal error "})
