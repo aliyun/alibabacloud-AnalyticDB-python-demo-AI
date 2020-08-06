@@ -66,26 +66,12 @@ def create_pipeline(pipeline_name):
             print r
         db.session.commit()
 
-# pipelines = ['female_cloth_recognizer', 'male_cloth_recognizer', 'child_cloth_recognizer', 'shoe_recognizer', 'bag_recognizer']
-pipelines = ['scene_recognition_attributes']
+pipelines = ['general_feature_extractor']
 
 for pipeline_name in pipelines:
     create_pipeline(pipeline_name)
 
 db.create_all()
-
-# qa.insert('1+1=?', '2')
-# result = qa.search(u'忘记密码怎么办')
-# for row in result:
-#     print type(row[0])
-#     print row[0].encode('utf-8'), row[2]
-
-# # db.session.begin()
-# result_set = db.session.execute(func.open_analytic.pipeline_create('shoe_recognizer'))
-# # db.engine.commit()
-# for r in result_set:
-#     print r
-# db.session.commit()
 
 @app.route('/')
 def index():
