@@ -10,6 +10,10 @@
     
 介绍文档:
     [<<使用AnalyticDB轻松实现以图搜图和人脸检索>>](https://developer.aliyun.com/article/765982?spm=a2c6h.13148508.0.0.7f4d4f0eAsgEzv)
+    [<<AnalyticDB向量检索+AI 实战: 商品多维度搜索和识别>>](./doc/application_item_search.pdf)
+    [<<AnalyticDB向量检索+AI 实战: 单轮问答系统>>](./doc/application_qa.pdf)
+    [<<AnalyticDB向量检索+AI 实战: 声纹识别>>](./doc/application_speech.pdf)
+
     
 ## 使用方法:
 1. 首先需要获取AnalyticDB PostgreSQL版连接信息 获得AnalyticDB连接串. 可以加入下方钉钉群1元试用. 
